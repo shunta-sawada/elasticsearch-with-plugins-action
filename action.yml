@@ -1,38 +1,34 @@
-name: 'Setup ElasticSearch'
-description: 'Setup ElasticSearch'
-author: 'igaiga'
+name: 'Run Elasticsearch'
+description: 'This action spins up an Elasticsearch instance that can be accessed and used in your subsequent steps.'
+author: 'elastic'
+
 branding:
   icon: 'database'
-  color: 'orange'
+  color: 'green'
+
 inputs:
-  elasticsearch version:
-    description: 'Version of elasticsearch to use'
+  stack-version:
+    description: 'The version of the Elastic Stack you want to run'
+    required: true
+  security-enabled:
+    description: 'Enable or disable HTTPS, enabled by default'
+    default: 'true'
     required: false
-    default: 'latest'
-  host port:
-    description: 'The port of host'
+  nodes:
+    description: 'Number of nodes in the cluster'
+    required: false
+    default: 1
+  port:
+    description: 'Port where you want to run Elasticsearch'
     required: false
     default: 9200
-  container port:
-    description: 'The port of container'
+  elasticsearch_password:
+    description: 'The password for the user elastic in your cluster'
     required: false
-    default: 9200
+    default: 'changeme'
   plugins:
-    description: 'Elasticsearch plugin strings'
+    description: 'Plugins that you want to include'
     required: false
-    default: ''
-  host node port:
-    description: 'The port of host elasticsearch node port'
-    required: false
-    default: 9300
-  node port:
-    description: 'The port of elasticsearch node port'
-    required: false
-    default: 9300
-  discovery type:
-    description: 'the discovery.type envionment'
-    required: false
-    default: 'single-node'
 
 runs:
   using: 'docker'
@@ -40,4 +36,6 @@ runs:
   env:
     STACK_VERSION: ${{ inputs.stack-version }}
     NODES: ${{ inputs.nodes }}
+    PORT: ${{ inputs.port }}
     PLUGINS: ${{ inputs.plugins }}
+    SECURITY_ENABLED: ${{ inputs.security-enabled }}

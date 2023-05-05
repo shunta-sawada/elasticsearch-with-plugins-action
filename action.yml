@@ -1,6 +1,6 @@
 name: 'Run Elasticsearch'
 description: 'This action spins up an Elasticsearch instance that can be accessed and used in your subsequent steps.'
-author: 'elastic'
+author: 'igaiga'
 
 branding:
   icon: 'database'
@@ -27,8 +27,9 @@ inputs:
     required: false
     default: 'changeme'
   plugins:
-    description: 'Plugins that you want to include'
+    description: 'Elasticsearch plugin strings'
     required: false
+    default: ''
 
 runs:
   using: 'docker'
